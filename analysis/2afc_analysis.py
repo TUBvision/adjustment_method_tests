@@ -1,19 +1,12 @@
-import re
 import pandas as pd
-from make_stimulus import image_to_array, normalize_image2, array_to_image
-import sys
-import os
 import csv
-import time
-import random
 import numpy as np
 from matplotlib import pyplot as plt
-from base_saveResults import convert_lum
-#~ rfl = '../results/' + sbj +'/' + sbj + '_' + str(blk) + '.csv' 
+import pypsignifit as psi
 
 # S-CL looks more similar: 0
 # S-CD looks more similar: 1
-def main(sbj, blk):
+def main(sbj):
 	# import design matrix
 	designDC = pd.read_csv('../design/2afc_design_' + sbj + '_Dark.csv', sep = " ", index_col=0) 
 	designLC = pd.read_csv('../design/2afc_design_' + sbj + '_Light.csv', sep = " ", index_col=0)
@@ -168,7 +161,7 @@ def main(sbj, blk):
 		plt.ylabel('% choosing the target-match pair')
 		plt.xlabel('luminance proportion to target ellipse luminance (%)')
 		plt.title(titles[pairN])
-		plt.savefig('../fig/' + sbj + 'DCp' + str(pairN))
+		plt.savefig('../figures/' + sbj + 'DCp' + str(pairN))
 		
 		plt.figure()
 		plt.scatter(nDev+100, pCorrectLC[:len(nDev),n]*100)
@@ -182,7 +175,7 @@ def main(sbj, blk):
 		plt.ylabel('% choosing the target-match pair')
 		plt.xlabel('luminance proportion to target ellipse luminance (%)')
 		plt.title(titles[pairN])
-		plt.savefig('../fig/' + sbj + 'LCp'+str(pairN))
+		plt.savefig('../figures/' + sbj + 'LCp'+str(pairN))
 		
 	for i in range(2):
 		savefigpmf(i)
@@ -191,6 +184,5 @@ def main(sbj, blk):
 
 
 if __name__ == '__main__':
-	a = str(sys.argv[1])
-	b = int(sys.argv[2])
-	main(a,b)
+	initials = raw_input("initals :  ")
+	main(str(initials))

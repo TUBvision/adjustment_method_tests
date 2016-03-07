@@ -86,8 +86,8 @@ def main(sbj):
 	Dt = np.unique(onD_target)
 	Lt = np.unique(onL_target)
 
-	avgMatch = np.zeros((2,4))
-	stds     = np.zeros((2,4))
+	avgMatch = np.zeros((2,len(Dt)))
+	stds     = np.zeros((2,len(Dt)))
 	for i in range(len(Dt)):
 		avgMatch[0][i] = np.average(convert_lum(onD_match[onD_target == Dt[i]]))
 		avgMatch[1][i] = np.average(convert_lum(onL_match[onL_target == Lt[i]]))
@@ -142,9 +142,6 @@ def main(sbj):
 	tD = np.unique(df['tContrast'][:lendata])  ## target ellipse was on a dark check and has luminance > 58; dark check luminace 1
 	tL = np.unique(df['tContrast'][lendata:])  ## target ellipse was on a dark check and has luminance < 58; light check luminance 2
 
-	print tD
-	print tL
-
 	onD_target = tContrast[:lendata]
 	onD_match  = mContrast[:lendata]
 	onL_target = tContrast[lendata:]
@@ -153,8 +150,8 @@ def main(sbj):
 	Dt = np.unique(onD_target)
 	Lt = np.unique(onL_target)
 
-	avgMatch = np.zeros((2,4))
-	stds     = np.zeros((2,4))
+	avgMatch = np.zeros((2,len(Dt)))
+	stds     = np.zeros((2,len(Dt)))
 	for i in range(len(Dt)):
 		avgMatch[0][i] = np.average(onD_match[onD_target == Dt[i]])
 		avgMatch[1][i] = np.average(onL_match[onL_target == Lt[i]])
@@ -183,7 +180,7 @@ def main(sbj):
 	plt.ylim([-0.4, 0.25])
 	plt.legend(loc = 'upper right', prop = {'size':15})
 	plt.title('adjustment experiment on contrast space', size = 20)
-	plt.savefig('../figures/adjExpt_mc' + sbj)
+	plt.savefig('../figures/adjExpt_mc_' + sbj)
 
 ### Run Main ###
 
